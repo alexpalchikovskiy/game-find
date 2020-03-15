@@ -16,6 +16,11 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  data(){
+    return {
+      list: ['space', 'banana', 'pizza', 'egg']
+    }
   }
 }
 </script>
