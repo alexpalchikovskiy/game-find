@@ -1,11 +1,16 @@
 <template>
+<div class="scroll">
   <div class="home">
-    <div id="nav">
-        <router-link to="/find/space">Єнот</router-link>
-    </div>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-link 
+      v-for="(i, index) in list"
+      :key="index"
+      :to="'/find/'+i"
+      :style="'background-image: url(/img/'+i+'-bg.jpg);'"
+    >
+      <img :src="'/img/'+i+'-item.png'" />
+    </router-link>
   </div>
+</div>
 </template>
 
 <script>
@@ -19,8 +24,36 @@ export default {
   },
   data(){
     return {
-      list: ['space', 'banana', 'pizza', 'egg']
+      list: ['space', 'banana', 'pizza', 'egg', 'candy']
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .scroll {
+    //overflow: auto;
+    height: 100%;
+  }
+  .home {
+    padding: 20px 0 0;
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+      max-width: 400px;
+      height: 130px;
+      background-size: cover;
+      background-position: center;
+      border: 3px solid white;
+      margin: 0 auto 20px;
+    }
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      filter: drop-shadow(2px 0 0px white) drop-shadow(-2px 0 0px white) drop-shadow(0 -2px 0px white) drop-shadow(0 2px 0px white);
+    }
+  }
+</style>

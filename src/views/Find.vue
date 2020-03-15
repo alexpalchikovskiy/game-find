@@ -4,6 +4,8 @@
         :style="'background-image: url(/img/'+$route.params.type+'-bg.jpg);'"
     >
 
+        <div class="fade"></div>
+
         <div class="btn is-start" v-on:click="start()"></div>
         <div class="btn is-menu"><router-link to="/"></router-link></div>
 
@@ -12,7 +14,7 @@
 
         <!--<span>{{counter.touches}} / {{counter.opened}}</span>-->
 
-        <div class="items">
+        <div class="items" v-body-scroll-lock="true">
             <div class="game__item-fade" :style="'background-image: url(/img/'+$route.params.type+'-item.png);'"></div>
             <div class="game__item-fade" :style="'background-image: url(/img/'+$route.params.type+'-item.png);'"></div>
             <div class="game__item-fade" :style="'background-image: url(/img/'+$route.params.type+'-item.png);'"></div>
@@ -47,6 +49,7 @@
 
 <script>
 import { gsap } from "gsap";
+
 export default {
     name: 'Find',
     data(){
@@ -59,6 +62,9 @@ export default {
             },
             list: this.shuffle( this.getArray() )
         }
+    },
+    created: function(){
+        screen.orientation.lock('landscape');
     },
     methods: {
         start: function(){
@@ -403,6 +409,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    .fade {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        background: black;
+        display: none;
+        background-image: url(https://visualizer.diamondatlowes.com/rooms/i/rotate.gif);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    @media (orientation: portrait) {
+        .fade {
+            display: block;
+        }
+    }
+
     .btn {
         width: 100px;
         height: 100px;
@@ -429,6 +455,10 @@ export default {
             }
             background-image: url(https://img.icons8.com/plasticine/100/000000/menu.png);
             background-position: center;
+            top: auto;
+            bottom: 20px;
+            left: auto;
+            right: 20px;
             a {
                 width: 100%;
                 height: 100%;
@@ -490,12 +520,13 @@ export default {
         }
         &__x {
             z-index: 1;
+            background-size: auto 86%;
         }
         &__item-fade {
-            background-size: contain;
+            background-size: auto 86%;
             background-position: center;
             background-repeat: no-repeat;
-            filter: contrast(0);
+            filter: contrast(0) brightness(3) drop-shadow(2px 2px 2px black);
             opacity: .5;
         }
     }

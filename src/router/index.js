@@ -3,7 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Find from '../views/Find.vue'
 
-Vue.use(VueRouter)
+import VBodyScrollLock from 'v-body-scroll-lock'
+
+Vue.use(VueRouter);
+Vue.use(VBodyScrollLock);
 
 const routes = [
   {
